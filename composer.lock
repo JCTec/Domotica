@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "66ca7343889332c2b8ecca11c251430c",
+    "content-hash": "cc7538d8ee30345d26b6028cc4ceb07a",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -455,16 +455,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.7.3",
+            "version": "v5.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "536a024e3ef6b93f55f4039a7f4568efa7e60aea"
+                "reference": "f6e8f6562120e0063313e81716666cfcd362569b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/536a024e3ef6b93f55f4039a7f4568efa7e60aea",
-                "reference": "536a024e3ef6b93f55f4039a7f4568efa7e60aea",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/f6e8f6562120e0063313e81716666cfcd362569b",
+                "reference": "f6e8f6562120e0063313e81716666cfcd362569b",
                 "shasum": ""
             },
             "require": {
@@ -592,7 +592,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2018-09-11T13:42:55+00:00"
+            "time": "2018-09-18T13:34:05+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -876,16 +876,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.0.3",
+            "version": "v4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "bd088dc940a418f09cda079a9b5c7c478890fb8d"
+                "reference": "fa6ee28600d21d49b2b4e1006b48426cec8e579c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/bd088dc940a418f09cda079a9b5c7c478890fb8d",
-                "reference": "bd088dc940a418f09cda079a9b5c7c478890fb8d",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/fa6ee28600d21d49b2b4e1006b48426cec8e579c",
+                "reference": "fa6ee28600d21d49b2b4e1006b48426cec8e579c",
                 "shasum": ""
             },
             "require": {
@@ -923,7 +923,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2018-07-15T17:25:16+00:00"
+            "time": "2018-09-18T07:03:24+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1269,6 +1269,63 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "sven/artisan-view",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/svenluijten/artisan-view.git",
+                "reference": "a4eae2ea4cbc45bbec1ea3640b494511bfccf362"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/svenluijten/artisan-view/zipball/a4eae2ea4cbc45bbec1ea3640b494511bfccf362",
+                "reference": "a4eae2ea4cbc45bbec1ea3640b494511bfccf362",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "graham-campbell/testbench": "^5.0",
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "~7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Sven\\ArtisanView\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sven\\ArtisanView\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sven Luijten",
+                    "email": "svenluijten1995@gmail.com",
+                    "homepage": "https://svenluijten.com"
+                }
+            ],
+            "description": "Manage your views in Laravel projects through artisan",
+            "keywords": [
+                "artisan",
+                "blade",
+                "laravel",
+                "templates",
+                "views"
+            ],
+            "time": "2018-09-04T18:18:59+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4060,7 +4117,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "sven/artisan-view": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -11,6 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/setState/{lm35}/{fotoresistor}', 'HomeController@setState');
+Route::get('/getState', 'HomeController@getState')->name('getState');
+
+Route::get('/setDC/{state}', 'HomeController@setDC');
+Route::get('/setBuzzer/{state}', 'HomeController@setBuzzer');
+Route::get('/setLED/{state}', 'HomeController@setLED');
+
+Route::get('/getExternal', 'HomeController@getEvery')->name('getExternal');
+
