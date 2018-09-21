@@ -34,19 +34,6 @@ class HomeController extends Controller
         return view('home')->with(['lm35' => 33.22, 'fotoresistor' => 32.22, 'led' => true]);
     }
 
-    public function setState($lm35, $fotoresistor){
-        $user = Auth::user();
-
-        if($user) {
-            $state = new State();
-            $state->lm35 = $lm35;
-            $state->fotoresistor = $fotoresistor;
-
-            $state->saveOrFail();
-
-            return 'S';
-        }
-    }
 
     public function getState(){
         $user = Auth::user();
@@ -66,7 +53,7 @@ class HomeController extends Controller
 
             $stateDC = new DC();
 
-            if(strtolower($state) == "true" || $state == 1 || $state == "1" || $state == true){
+            if(strtolower($state) == "true" or $state == 1 or $state == "1"){
                 $stateDC->state = 1;
             }else{
                 $stateDC->state = 0;
@@ -86,7 +73,7 @@ class HomeController extends Controller
             $stateDC = new buzzer();
 
 
-            if(strtolower($state) == "true" || $state == 1 || $state == "1" || $state == true){
+            if(strtolower($state) == "true" or $state == 1 or $state == "1"){
                 $stateDC->state = 1;
             }else{
                 $stateDC->state = 0;
@@ -105,8 +92,7 @@ class HomeController extends Controller
 
             $stateDC = new led();
 
-
-            if(strtolower($state) == "true" || $state == 1 || $state == "1" || $state == true){
+            if(strtolower($state) == "true" or $state == 1 or $state == "1"){
                 $stateDC->state = 1;
             }else{
                 $stateDC->state = 0;
@@ -118,30 +104,11 @@ class HomeController extends Controller
         }
     }
 
-    public function getEvery(){
-        $user = Auth::user();
-
-        if($user) {
-
-            $Buzzer = buzzer::orderBy('created_at', 'desc')->first();
-            $led = led::orderBy('created_at', 'desc')->first();
-            $dc = DC::orderBy('created_at', 'desc')->first();
-
-            function setOFF(){
-                $buzzer = new buzzer();
-                $buzzer->state = 0;
-
-                $dc = new DC();
-                $dc->state = 0;
-
-                $buzzer->saveOrFail();
-                $dc->saveOrFail();
-                return;
-            }
-
-            $jobs = setOFF()->delay(Carbon::now()->addSeconds(10));
-
-            return $Buzzer->state. ",".$led->state. ",".$dc->state;
+    private function BooltoString($bool){
+        if($bool){
+            return "True";
+        }else{
+            return "False";
         }
     }
 
