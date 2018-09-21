@@ -6,6 +6,7 @@ use App\buzzer;
 use App\DC;
 use App\led;
 use App\State;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Session;
@@ -64,10 +65,8 @@ class HomeController extends Controller
         if($user) {
 
             $stateDC = new DC();
-            $stateDC->state = 1;
 
-
-            if(strtolower($state) == "true" || $state == 1 || $state == "1"){
+            if(strtolower($state) == "true" || $state == 1 || $state == "1" || $state == true){
                 $stateDC->state = 1;
             }else{
                 $stateDC->state = 0;
@@ -85,10 +84,9 @@ class HomeController extends Controller
         if($user) {
 
             $stateDC = new buzzer();
-            $stateDC->state = 1;
 
 
-            if(strtolower($state) == "true" || $state == 1 || $state == "1"){
+            if(strtolower($state) == "true" || $state == 1 || $state == "1" || $state == true){
                 $stateDC->state = 1;
             }else{
                 $stateDC->state = 0;
@@ -106,10 +104,9 @@ class HomeController extends Controller
         if($user) {
 
             $stateDC = new led();
-            $stateDC->state = 1;
 
 
-            if(strtolower($state) == "true" || $state == 1 || $state == "1"){
+            if(strtolower($state) == "true" || $state == 1 || $state == "1" || $state == true){
                 $stateDC->state = 1;
             }else{
                 $stateDC->state = 0;
@@ -130,7 +127,32 @@ class HomeController extends Controller
             $led = led::orderBy('created_at', 'desc')->first();
             $dc = DC::orderBy('created_at', 'desc')->first();
 
+            function setOFF(){
+                $buzzer = new buzzer();
+                $buzzer->state = 0;
+
+                $dc = new DC();
+                $dc->state = 0;
+
+                $buzzer->saveOrFail();
+                $dc->saveOrFail();
+                return;
+            }
+
+            $jobs = setOFF()->delay(Carbon::now()->addSeconds(10));
+
             return $Buzzer->state. ",".$led->state. ",".$dc->state;
+        }
+    }
+
+    public function getLed(){
+        $user = Auth::user();
+
+        if($user) {
+
+            $led = led::orderBy('created_at', 'desc')->first();
+
+            return $led->state;
         }
     }
 

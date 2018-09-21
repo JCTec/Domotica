@@ -6,18 +6,66 @@
         <div class="col-md-8">
 
             <script>
+                function motorCallback() {
+
+                }
+
+                function buzzerCallback() {
+
+                }
+
+                function ledCallback() {
+
+                }
+
                 $(document).ready(function () {
 
                     $('#motor').on('click', function () {
+                        $.ajax({
+                            url: '{{route('setDC', ['state' => 'true'])}}',
+                            data: null,
+                            success: motorCallback,
+                            dataType: null
+                        });
+
+                        $('#imgW').attr('src', '{{asset('img/motor.png')}}');
+                        $('#textW').text('Motor Activado');
+                        document.getElementById('modal-wrapper-C').style.display='block';
 
                     });
 
-                    $('#motor').on('click', function () {
+                    $('#buzzer').on('click', function () {
+                        $.ajax({
+                            url: '{{route('setBuzzer', ['state' => 'true'])}}',
+                            data: null,
+                            success: buzzerCallback,
+                            dataType: null
+                        });
+
+                        $('#imgW').attr('src', '{{asset('img/alarm.png')}}');
+                        $('#textW').text('Alarma Activada');
+                        document.getElementById('modal-wrapper-C').style.display='block';
 
                     });
 
-                    $('#motor').on('click', function () {
-
+                    $('#led').on('click', function () {
+                        if($(this).css('background-color') === 'rgb(148, 148, 148)'){
+                            $(this).css('background-color', 'white');
+                            $.ajax({
+                                url: '{{route('setLED', ['state' => 'false'])}}',
+                                data: null,
+                                success: ledCallback,
+                                dataType: null
+                            });
+                        }else {
+                            $(this).css('background-color', '#949494');
+                            $.ajax({
+                                url: '{{route('setLED', ['state' => 'true'])}}',
+                                data: null,
+                                success: ledCallback,
+                                dataType: null
+                            });
+                        }
                     });
 
                     var deg = parseInt('{{$lm35}}', 10);
@@ -64,7 +112,7 @@
 
                     var fotoresistor = parseFloat('{{$fotoresistor}}');
 
-                    if(fotoresistor > 50){
+                    if(fotoresistor < 50){
                         $('#dayNight').attr('src', '{{asset('img/sunny.png')}}')
                     }else{
                         $('#dayNight').attr('src', '{{asset('img/night.png')}}')
@@ -75,7 +123,7 @@
             <div style="text-align: center">
                 <div class="row col">
                     <div class="col-md-12" style="text-align: center">
-                        <img id="dayNight" src="{{asset('loading.gif')}}" width="100px" height="100px">
+                        <img id="dayNight" src="{{asset('img/loading.gif')}}" width="100px" height="100px">
                     </div>
                 </div>
 
@@ -128,6 +176,28 @@
                     <div class="col circleWrapper">
                         <div id="motor" class="circle"><img src="{{asset('img/motor.png')}}" width="30px" height="30px"></div>
                     </div>
+                </div>
+
+                <div id="modal-wrapper-C" class="modal">
+
+                    <div id="modal-content-C" class="modal-content animate">
+
+                        <div class="imgcontainer">
+                            <span onclick="document.getElementById('modal-wrapper-C').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                            <img id="imgW" src="{{asset('img/loading.gif')}}" width="50px" height="50px">
+                        </div>
+
+                        <div class="container">
+
+                            <div class="info">
+                                <div class="row col" style="align-content: center; text-align: center">
+                                    <h4 id="textW">Motor</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
 

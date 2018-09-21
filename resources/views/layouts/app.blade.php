@@ -125,6 +125,57 @@
             align-content: center;
             align-items: center;
         }
+
+        /* The Modal (background) */
+        .modal {
+            display:none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        /* Modal Content Box */
+        .modal-content {
+            background-color: #ffffff;
+            margin: 4% auto 15% auto;
+            border: 1px solid #888;
+            width: 300px;
+            padding-bottom: 30px;
+            color: white;
+        }
+
+        /* Center the image and position the close button */
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 0px 0;
+            margin-right: 20px;
+            position: relative;
+        }
+        .avatar {
+            width: 200px;
+            height:200px;
+            border-radius: 50%;
+        }
+
+
+        .info {
+            text-align: center;
+            align-content: center;
+            width: 100%;
+        }
+
+        .info div {
+            text-align: center;
+            align-content: center;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
     </style>
 </head>
 <body>
