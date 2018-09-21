@@ -16,8 +16,116 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        body * {
+            font-family: 'Nunito', sans-serif;
+            box-sizing: border-box;
+            color: black;
+        }
+
+        #countdown-wrap {
+            width: 100%;
+            margin: 60px;
+            text-align: center;
+            font-family: arial;
+            max-width: 650px;
+        }
+
+        #goal {
+            font-size: 48px;
+            text-align: right;
+            color: #FFF;
+            @media only screen and (max-width : 640px) {
+                text-align: center;
+            }
+
+        }
+
+        #glass {
+            width: 100%;
+            height: 20px;
+            background: #c7c7c7;
+            border-radius: 10px;
+            float: left;
+            overflow: hidden;
+        }
+
+        #progress {
+            float: left;
+            width: 16%;
+            height: 20px;
+            background: #FF5D50;
+            z-index: 333;
+        }
+
+        .goal-stat {
+            width: 10%;
+            padding: 10px;
+            float: left;
+            margin: 0;
+            color: #FFF;
+
+            @media only screen and (max-width : 640px) {
+                width: 50%;
+                text-align: center;
+            }
+        }
+
+        .goal-number, .goal-label {
+            display: block;
+        }
+
+        .goal-number {
+            font-weight: bold;
+        }
+
+        .circleWrapper {
+            text-align: center;
+            align-content: center;
+        }
+
+        .circleWrapper .circle {
+            text-align: center;
+            align-content: center;
+        }
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            border-radius: 100px;
+            border: black solid 1px;
+            display:inline-block;
+            -o-transition:.5s;
+            -ms-transition:.5s;
+            -moz-transition:.5s;
+            -webkit-transition:.5s;
+            /* ...and now for the proper property */
+            transition:.5s;
+            cursor: pointer;
+        }
+
+        .circle:hover {
+            background-color: #949494;
+        }
+
+        .circle img {
+            margin: 30px;
+            display:inline-block;
+            vertical-align: middle;
+            text-align: center;
+            align-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
     <div id="app">

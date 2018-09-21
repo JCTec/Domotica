@@ -30,7 +30,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home')->with(['lm35' => 33.22, 'fotoresistor' => 32.22, 'led' => true]);
     }
 
     public function setState($lm35, $fotoresistor){
