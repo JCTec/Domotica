@@ -31,7 +31,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home')->with(['lm35' => 33.22, 'fotoresistor' => 32.22, 'led' => true]);
+        $state = State::orderBy('created_at', 'desc')->first();
+        $led = led::orderBy('created_at', 'desc')->first();
+
+
+        if($led){
+            $stateLED = $led->state;
+        }else{
+            $stateLED = 0;
+        }
+
+        return view('home')->with(['lm35' => $state->lm35, 'fotoresistor' =>  $state->fotoresistor, 'led' => $stateLED]);
     }
 
 

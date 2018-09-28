@@ -15,7 +15,7 @@ class CreateStatesTable extends Migration
     {
         Schema::create('states', function (Blueprint $table) {
             $table->increments('id');
-            $table->float('fotoresistor');
+            $table->boolean('fotoresistor');
             $table->float('lm35');
             $table->timestamps();
         });

@@ -14,25 +14,46 @@ use App\SessionRequest;
 class PICController extends Controller
 {
 
-    public function getEvery(){
+    public function getEvery()
+    {
         $Buzzer = buzzer::orderBy('created_at', 'desc')->first();
         $led = led::orderBy('created_at', 'desc')->first();
         $dc = DC::orderBy('created_at', 'desc')->first();
 
-        if($Buzzer->state or $dc->state){
+        if ($Buzzer->state or $dc->state) {
             TurnOffExtensions::dispatch()->delay(now()->addSecond(10));
         }
 
-        return $Buzzer->state. ",".$led->state. ",".$dc->state;
+        return $Buzzer->state . "," . $led->state . "," . $dc->state;
     }
 
-    public function setState($lm35, $fotoresistor){
+    public function setState($lm35, $fotoresistor)
+    {
         $state = new State();
-        $state->lm35 = $lm35;
-        $state->fotoresistor = $fotoresistor;
+        $state->lm35 = $this->vToC($lm35);
+        $state->fotoresistor = $this->assertBool($fotoresistor);
 
         $state->saveOrFail();
 
         return 'S';
     }
+
+    private function vToC($lm35)
+    {
+        $a = 4.88e-3;
+        return (float)($lm35 * $a)*100;
+    }
+
+    private function assertBool($bool){
+        if($bool == true){
+            return true;
+        }
+
+        if($bool === "true" or $bool === 1){
+            return true;
+        }
+
+        return false;
+    }
+
 }
