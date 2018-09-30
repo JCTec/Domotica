@@ -128,6 +128,11 @@
                                 success: ledCallback,
                                 dataType: null
                             });
+
+                            $('#imgW').attr('src', '{{asset('img/diode.png')}}');
+                            $('#textW').text('LED Desactivado');
+                            document.getElementById('modal-wrapper-C').style.display='block';
+
                         }else {
                             $(this).css('background-color', '#949494');
                             $.ajax({
@@ -136,6 +141,10 @@
                                 success: ledCallback,
                                 dataType: null
                             });
+
+                            $('#imgW').attr('src', '{{asset('img/diode.png')}}');
+                            $('#textW').text('LED Activado');
+                            document.getElementById('modal-wrapper-C').style.display='block';
                         }
                     });
 

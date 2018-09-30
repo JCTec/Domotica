@@ -20,11 +20,31 @@ class PICController extends Controller
         $led = led::orderBy('created_at', 'desc')->first();
         $dc = DC::orderBy('created_at', 'desc')->first();
 
+        if(!$Buzzer){
+            $Buzzer = new buzzer();
+            $Buzzer->state = 0;
+            $Buzzer->save();
+
+        }
+
+        if(!$led){
+            $led = new led();
+            $led->state = 0;
+            $led->save();
+
+        }
+
+        if(!$dc){
+            $dc = new DC();
+            $dc->state = 0;
+            $dc->save();
+        }
+
         if ($Buzzer->state or $dc->state) {
             TurnOffExtensions::dispatch()->delay(now()->addSecond(10));
         }
 
-        return $Buzzer->state . "," . $led->state . "," . $dc->state;
+        return "@#@Start:[".$Buzzer->state . $led->state . $dc->state."]";
     }
 
     public function setState($lm35, $fotoresistor)
@@ -35,7 +55,7 @@ class PICController extends Controller
 
         $state->saveOrFail();
 
-        return 'S';
+        return response('S');
     }
 
     private function vToC($lm35)
