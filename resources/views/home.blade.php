@@ -91,7 +91,7 @@
                             },
                             dataType: "json"
                         });
-                    }, 10000);
+                    }, 5000);
 
                     $('#motor').on('click', function () {
                         $.ajax({
