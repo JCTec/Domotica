@@ -86,6 +86,8 @@
                                 setTemp(data["lm35"]);
 
                                 setDayNight(data["fotoresistor"]);
+
+                                $('#progress').text(data["lm35"]);
                             },
                             dataType: "json"
                         });

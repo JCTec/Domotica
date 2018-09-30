@@ -60,7 +60,7 @@ class PICController extends Controller
 
     private function vToC($lm35)
     {
-        $a = 4.88e-3;
+        $a = 4.68e-3;
         return (float)($lm35 * $a)*100;
     }
 
