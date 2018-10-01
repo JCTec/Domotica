@@ -91,34 +91,68 @@
                             },
                             dataType: "json"
                         });
-                    }, 5000);
+                    }, 2000);
 
                     $('#motor').on('click', function () {
-                        $.ajax({
-                            url: '{{route('setDC', ['state' => 'true'])}}',
-                            data: null,
-                            success: motorCallback,
-                            dataType: null
-                        });
 
-                        $('#imgW').attr('src', '{{asset('img/motor.png')}}');
-                        $('#textW').text('Motor Activado');
-                        document.getElementById('modal-wrapper-C').style.display='block';
+                        if($(this).css('background-color') === 'rgb(148, 148, 148)'){
 
+                            $(this).css('background-color', 'white');
+                            $.ajax({
+                                url: '{{route('setDC', ['state' => 'false'])}}',
+                                data: null,
+                                success: motorCallback,
+                                dataType: null
+                            });
+
+                            $('#imgW').attr('src', '{{asset('img/motor.png')}}');
+                            $('#textW').text('Motor Desactivado');
+                            document.getElementById('modal-wrapper-C').style.display='block';
+
+                        }else {
+
+                            $(this).css('background-color', '#949494');
+                            $.ajax({
+                                url: '{{route('setDC', ['state' => 'true'])}}',
+                                data: null,
+                                success: motorCallback,
+                                dataType: null
+                            });
+
+                            $('#imgW').attr('src', '{{asset('img/motor.png')}}');
+                            $('#textW').text('Motor Activado');
+                            document.getElementById('modal-wrapper-C').style.display='block';
+                        }
                     });
 
                     $('#buzzer').on('click', function () {
-                        $.ajax({
-                            url: '{{route('setBuzzer', ['state' => 'true'])}}',
-                            data: null,
-                            success: buzzerCallback,
-                            dataType: null
-                        });
 
-                        $('#imgW').attr('src', '{{asset('img/alarm.png')}}');
-                        $('#textW').text('Alarma Activada');
-                        document.getElementById('modal-wrapper-C').style.display='block';
+                        if($(this).css('background-color') === 'rgb(148, 148, 148)'){
+                            $(this).css('background-color', 'white');
+                            $.ajax({
+                                url: '{{route('setBuzzer', ['state' => 'false'])}}',
+                                data: null,
+                                success: buzzerCallback,
+                                dataType: null
+                            });
 
+                            $('#imgW').attr('src', '{{asset('img/alarm.png')}}');
+                            $('#textW').text('Alarma Desactivada');
+                            document.getElementById('modal-wrapper-C').style.display='block';
+
+                        }else {
+                            $(this).css('background-color', '#949494');
+                            $.ajax({
+                                url: '{{route('setBuzzer', ['state' => 'true'])}}',
+                                data: null,
+                                success: buzzerCallback,
+                                dataType: null
+                            });
+
+                            $('#imgW').attr('src', '{{asset('img/alarm.png')}}');
+                            $('#textW').text('Alarma Activada');
+                            document.getElementById('modal-wrapper-C').style.display='block';
+                        }
                     });
 
                     $('#led').on('click', function () {
@@ -154,6 +188,18 @@
 
                     if(led == 1){
                         $('#led').css('background-color', '#949494');
+                    }
+
+                    var DC = parseInt('{{$dcV}}', 10);
+
+                    if(DC == 1){
+                        $('#motor').css('background-color', '#949494');
+                    }
+
+                    var BUZZ = parseInt('{{$buzzerV}}', 10);
+
+                    if(BUZZ == 1){
+                        $('#buzzer').css('background-color', '#949494');
                     }
 
                     setTemp('{{$lm35}}');

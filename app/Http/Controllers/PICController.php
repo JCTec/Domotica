@@ -9,10 +9,12 @@ use App\led;
 use App\State;
 use Carbon\Carbon;
 use App\Session;
+use Illuminate\Support\Facades\Response;
 use App\SessionRequest;
 
 class PICController extends Controller
 {
+
 
     public function getEvery()
     {
@@ -40,9 +42,9 @@ class PICController extends Controller
             $dc->save();
         }
 
-        if ($Buzzer->state or $dc->state) {
+        /*if ($Buzzer->state or $dc->state) {
             TurnOffExtensions::dispatch()->delay(now()->addSecond(10));
-        }
+        }*/
 
         return "@#@Start:[".$Buzzer->state . $led->state . $dc->state."]";
     }
@@ -55,7 +57,7 @@ class PICController extends Controller
 
         $state->saveOrFail();
 
-        return response('S');
+        return "S";
     }
 
     private function vToC($lm35)

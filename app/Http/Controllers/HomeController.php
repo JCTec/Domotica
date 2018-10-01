@@ -33,7 +33,8 @@ class HomeController extends Controller
     {
         $state = State::orderBy('created_at', 'desc')->first();
         $led = led::orderBy('created_at', 'desc')->first();
-
+        $Buzzer = buzzer::orderBy('created_at', 'desc')->first();
+        $dc = DC::orderBy('created_at', 'desc')->first();
 
         if($led){
             $stateLED = $led->state;
@@ -41,7 +42,19 @@ class HomeController extends Controller
             $stateLED = 0;
         }
 
-        return view('home')->with(['lm35' => $state->lm35, 'fotoresistor' =>  $state->fotoresistor, 'led' => $stateLED]);
+        if($Buzzer){
+            $dcV = $Buzzer->state;
+        }else{
+            $dcV = 0;
+        }
+
+        if($dc){
+            $buzzerV = $dc->state;
+        }else{
+            $buzzerV = 0;
+        }
+
+        return view('home')->with(['lm35' => $state->lm35, 'fotoresistor' =>  $state->fotoresistor, 'led' => $stateLED, 'dcV' =>  $dcV, 'buzzerV' => $buzzerV]);
     }
 
 
@@ -63,7 +76,7 @@ class HomeController extends Controller
 
             $stateDC = new DC();
 
-            if(strtolower($state) == "true" or $state == 1 or $state == "1"){
+            if(strtolower($state) == "true"){
                 $stateDC->state = 1;
             }else{
                 $stateDC->state = 0;
@@ -83,7 +96,7 @@ class HomeController extends Controller
             $stateDC = new buzzer();
 
 
-            if(strtolower($state) == "true" or $state == 1 or $state == "1"){
+            if(strtolower($state) == "true"){
                 $stateDC->state = 1;
             }else{
                 $stateDC->state = 0;
@@ -102,7 +115,7 @@ class HomeController extends Controller
 
             $stateDC = new led();
 
-            if(strtolower($state) == "true" or $state == 1 or $state == "1"){
+            if(strtolower($state) == "true"){
                 $stateDC->state = 1;
             }else{
                 $stateDC->state = 0;
