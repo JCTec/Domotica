@@ -43,15 +43,15 @@ class HomeController extends Controller
         }
 
         if($Buzzer){
-            $dcV = $Buzzer->state;
+            $buzzerV = $Buzzer->state;
         }else{
-            $dcV = 0;
+            $buzzerV = 0;
         }
 
         if($dc){
-            $buzzerV = $dc->state;
+            $dcV = $dc->state;
         }else{
-            $buzzerV = 0;
+            $dcV = 0;
         }
 
         return view('home')->with(['lm35' => $state->lm35, 'fotoresistor' =>  $state->fotoresistor, 'led' => $stateLED, 'dcV' =>  $dcV, 'buzzerV' => $buzzerV]);
@@ -76,6 +76,7 @@ class HomeController extends Controller
 
             $stateDC = new DC();
 
+
             if(strtolower($state) == "true"){
                 $stateDC->state = 1;
             }else{
@@ -83,6 +84,7 @@ class HomeController extends Controller
             }
 
             $stateDC->saveOrFail();
+
 
             return 'S';
         }

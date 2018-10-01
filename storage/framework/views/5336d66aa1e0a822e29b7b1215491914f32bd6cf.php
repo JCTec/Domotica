@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -67,9 +65,9 @@
                     var fotoresistor = (fotoresistorVar == '1');
 
                     if(fotoresistor){
-                        $('#dayNight').attr('src', '{{asset('img/sunny.png')}}')
+                        $('#dayNight').attr('src', '<?php echo e(asset('img/sunny.png')); ?>')
                     }else{
-                        $('#dayNight').attr('src', '{{asset('img/night.png')}}')
+                        $('#dayNight').attr('src', '<?php echo e(asset('img/night.png')); ?>')
                     }
                 }
 
@@ -77,7 +75,7 @@
 
                     setInterval(function() {
                         $.ajax({
-                            url: '{{route('getState')}}',
+                            url: '<?php echo e(route('getState')); ?>',
                             data: null,
                             success: function (data) {
                                 console.log(data["lm35"]);
@@ -99,7 +97,7 @@
 
                             $(this).css('background-color', 'white');
                             $.ajax({
-                                url: '{{route('setDC', ['state' => 'false'])}}',
+                                url: '<?php echo e(route('setDC', ['state' => 'false'])); ?>',
                                 data: null,
                                 success: function (data) {
                                     console.log(data)
@@ -107,7 +105,7 @@
                                 dataType: null
                             });
 
-                            $('#imgW').attr('src', '{{asset('img/motor.png')}}');
+                            $('#imgW').attr('src', '<?php echo e(asset('img/motor.png')); ?>');
                             $('#textW').text('Motor Desactivado');
                             document.getElementById('modal-wrapper-C').style.display='block';
 
@@ -115,7 +113,7 @@
 
                             $(this).css('background-color', '#949494');
                             $.ajax({
-                                url: '{{route('setDC', ['state' => 'true'])}}',
+                                url: '<?php echo e(route('setDC', ['state' => 'true'])); ?>',
                                 data: null,
                                 success: function (data) {
                                     console.log(data)
@@ -123,7 +121,7 @@
                                 dataType: null
                             });
 
-                            $('#imgW').attr('src', '{{asset('img/motor.png')}}');
+                            $('#imgW').attr('src', '<?php echo e(asset('img/motor.png')); ?>');
                             $('#textW').text('Motor Activado');
                             document.getElementById('modal-wrapper-C').style.display='block';
                         }
@@ -134,7 +132,7 @@
                         if($(this).css('background-color') === 'rgb(148, 148, 148)'){
                             $(this).css('background-color', 'white');
                             $.ajax({
-                                url: '{{route('setBuzzer', ['state' => 'false'])}}',
+                                url: '<?php echo e(route('setBuzzer', ['state' => 'false'])); ?>',
                                 data: null,
                                 success: function (data) {
                                     console.log(data)
@@ -142,14 +140,14 @@
                                 dataType: null
                             });
 
-                            $('#imgW').attr('src', '{{asset('img/alarm.png')}}');
+                            $('#imgW').attr('src', '<?php echo e(asset('img/alarm.png')); ?>');
                             $('#textW').text('Alarma Desactivada');
                             document.getElementById('modal-wrapper-C').style.display='block';
 
                         }else {
                             $(this).css('background-color', '#949494');
                             $.ajax({
-                                url: '{{route('setBuzzer', ['state' => 'true'])}}',
+                                url: '<?php echo e(route('setBuzzer', ['state' => 'true'])); ?>',
                                 data: null,
                                 success: function (data) {
                                     console.log(data)
@@ -157,7 +155,7 @@
                                 dataType: null
                             });
 
-                            $('#imgW').attr('src', '{{asset('img/alarm.png')}}');
+                            $('#imgW').attr('src', '<?php echo e(asset('img/alarm.png')); ?>');
                             $('#textW').text('Alarma Activada');
                             document.getElementById('modal-wrapper-C').style.display='block';
                         }
@@ -167,52 +165,52 @@
                         if($(this).css('background-color') === 'rgb(148, 148, 148)'){
                             $(this).css('background-color', 'white');
                             $.ajax({
-                                url: '{{route('setLED', ['state' => 'false'])}}',
+                                url: '<?php echo e(route('setLED', ['state' => 'false'])); ?>',
                                 data: null,
                                 success: ledCallback,
                                 dataType: null
                             });
 
-                            $('#imgW').attr('src', '{{asset('img/diode.png')}}');
+                            $('#imgW').attr('src', '<?php echo e(asset('img/diode.png')); ?>');
                             $('#textW').text('LED Desactivado');
                             document.getElementById('modal-wrapper-C').style.display='block';
 
                         }else {
                             $(this).css('background-color', '#949494');
                             $.ajax({
-                                url: '{{route('setLED', ['state' => 'true'])}}',
+                                url: '<?php echo e(route('setLED', ['state' => 'true'])); ?>',
                                 data: null,
                                 success: ledCallback,
                                 dataType: null
                             });
 
-                            $('#imgW').attr('src', '{{asset('img/diode.png')}}');
+                            $('#imgW').attr('src', '<?php echo e(asset('img/diode.png')); ?>');
                             $('#textW').text('LED Activado');
                             document.getElementById('modal-wrapper-C').style.display='block';
                         }
                     });
 
-                    var led = parseInt('{{$led}}', 10);
+                    var led = parseInt('<?php echo e($led); ?>', 10);
 
                     if(led == 1){
                         $('#led').css('background-color', '#949494');
                     }
 
-                    var DC = parseInt('{{$dcV}}', 10);
+                    var DC = parseInt('<?php echo e($dcV); ?>', 10);
 
                     if(DC == 1){
                         $('#motor').css('background-color', '#949494');
                     }
 
-                    var BUZZ = parseInt('{{$buzzerV}}', 10);
+                    var BUZZ = parseInt('<?php echo e($buzzerV); ?>', 10);
 
                     if(BUZZ == 1){
                         $('#buzzer').css('background-color', '#949494');
                     }
 
-                    setTemp('{{$lm35}}');
+                    setTemp('<?php echo e($lm35); ?>');
 
-                    setDayNight('{{$fotoresistor}}');
+                    setDayNight('<?php echo e($fotoresistor); ?>');
 
                 });
             </script>
@@ -220,7 +218,7 @@
             <div style="text-align: center">
                 <div class="row col">
                     <div class="col-md-12" style="text-align: center">
-                        <img id="dayNight" src="{{asset('img/loading.gif')}}" width="100px" height="100px">
+                        <img id="dayNight" src="<?php echo e(asset('img/loading.gif')); ?>" width="100px" height="100px">
                     </div>
                 </div>
 
@@ -228,7 +226,8 @@
                     <div id="countdown-wrap" style="text-align: center">
                         <div id="glass">
                             <div id="progress" style="color: white; text-align: right; padding-right: 10px">
-                                {{$lm35}}
+                                <?php echo e($lm35); ?>
+
                             </div>
                         </div>
                         <div class="goal-stat">
@@ -266,13 +265,13 @@
 
                 <div class="row " style="text-align: center">
                     <div class="col circleWrapper">
-                        <div id="led" class="circle"><img src="{{asset('img/diode.png')}}" width="30px" height="30px"></div>
+                        <div id="led" class="circle"><img src="<?php echo e(asset('img/diode.png')); ?>" width="30px" height="30px"></div>
                     </div>
                     <div class="col circleWrapper">
-                        <div id="buzzer" class="circle"><img src="{{asset('img/alarm.png')}}" width="30px" height="30px"></div>
+                        <div id="buzzer" class="circle"><img src="<?php echo e(asset('img/alarm.png')); ?>" width="30px" height="30px"></div>
                     </div>
                     <div class="col circleWrapper">
-                        <div id="motor" class="circle"><img src="{{asset('img/motor.png')}}" width="30px" height="30px"></div>
+                        <div id="motor" class="circle"><img src="<?php echo e(asset('img/motor.png')); ?>" width="30px" height="30px"></div>
                     </div>
                 </div>
 
@@ -282,7 +281,7 @@
 
                         <div class="imgcontainer">
                             <span onclick="document.getElementById('modal-wrapper-C').style.display='none'" class="close" title="Close PopUp">&times;</span>
-                            <img id="imgW" src="{{asset('img/loading.gif')}}" width="50px" height="50px">
+                            <img id="imgW" src="<?php echo e(asset('img/loading.gif')); ?>" width="50px" height="50px">
                         </div>
 
                         <div class="container">
@@ -302,4 +301,6 @@
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
